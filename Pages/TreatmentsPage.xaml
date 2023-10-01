@@ -1,0 +1,27 @@
+﻿<Page x:Class="JustKey.Pages.TreatmentsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:JustKey.Pages"
+      mc:Ignorable="d"
+      Style="{StaticResource PageStyle}">
+    
+    <Border Style="{StaticResource BorderStyle}">
+        <Grid x:Name="MainGrid">
+
+            <Button x:Name="LogOut" 
+                        Style="{StaticResource RoundedDefaultButton}"
+                        Grid.Column="0" Grid.Row="1"
+                        Click="LogOut_Click"
+                        Margin="0,0,0,0">
+                <Image Source="\Images\logout.png"
+                           Style="{StaticResource ButtonImage}"
+                           Margin="5,0,0,0"
+                           Height="45" Width="45"/>
+            </Button>
+
+        </Grid>
+    </Border>
+    
+</Page>

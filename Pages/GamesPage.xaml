@@ -1,0 +1,237 @@
+﻿<Page x:Class="JustKey.Pages.GamesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:JustKey.Pages"
+      mc:Ignorable="d" 
+      Style="{StaticResource PageStyle}"
+      Loaded="Page_Loaded">
+
+    <Grid>
+        <Border Style="{StaticResource BorderStyle}">
+
+            <Grid x:Name="MainGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition x:Name="Row" Height="*"/>
+                    <RowDefinition Height="80"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="Column" Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="80"/>
+                </Grid.ColumnDefinitions>
+
+                <WrapPanel x:Name="gamesViews"
+                           Grid.Column="1" Grid.Row="1"
+                           Grid.ColumnSpan="2"
+                           Orientation="Horizontal"
+                           ItemHeight="275"
+                           ItemWidth="195">
+                </WrapPanel>
+
+                <TextBox x:Name="SearchRequest"
+                         Grid.Row="0" Grid.Column="1" 
+                         Height="25" Width="250"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Center"
+                         Padding="5,0,0,0"
+                         VerticalContentAlignment="Center"
+                         Margin="10,0,0,0"
+                         FontSize="16"
+                         BorderBrush="Black"
+                         Text="Поиск..."
+                         Foreground="Gray"
+                         KeyDown="SearchRequest_KeyDown"
+                         GotFocus="SearchRequest_GotFocus"
+                         LostFocus="SearchRequest_LostFocus"/>
+
+                <Button x:Name="SearchStart"
+                        Grid.Row="0" Grid.Column="1"
+                        Height="25" Width="25"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Margin="265,0,0,0"
+                        BorderBrush="Black"
+                        Background="White"
+                        Click="SearchStart_Click">
+                    <Image Source="\Images\search.png" 
+                           Stretch="Fill"/>
+                </Button>
+
+                <ComboBox x:Name="FilterRequest" 
+                          Grid.Row="0" Grid.Column="1"
+                          Height="25" Width="250"
+                          BorderBrush="Black"
+                          Background="White"
+                          VerticalContentAlignment="Center"
+                          Margin="310,0,0,0"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Center"
+                          FontSize="16"
+                          IsEditable="True"
+                          IsReadOnly="True"
+                          Text="Фильтровать по..."
+                          SelectionChanged="FilterRequest_SelectionChanged">
+                    <TextBlock>С фото</TextBlock>
+                    <TextBlock>Фото отсутствует</TextBlock>
+                </ComboBox>
+
+                <Button x:Name="ReloadPage"
+                        Grid.Row="0" Grid.Column="1"
+                        Height="25" Width="25"
+                        Margin="565,0,0,0"
+                        BorderBrush="Black"
+                        Background="White"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        ToolTip="Перезагрузить страницу" 
+                        Click="ReloadPage_Click">
+                    <Image Source="\Images\reload.png" 
+                           Stretch="Fill"/>
+                </Button>
+
+                <Button x:Name="AddNewGame"
+                        Grid.Row="0" Grid.Column="1"
+                        Height="25" Width="25"
+                        Margin="595,0,0,0"
+                        BorderBrush="Black"
+                        Background="White"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        ToolTip="Добавить нового сотрудника"
+                        Click="AddNewGame_Click">
+                    <Image Source="\Images\addgame.png" 
+                           Stretch="Fill"/>
+                </Button>
+
+                <Button x:Name="MoveToStartList"
+                        Grid.Row="0" Grid.Column="1"
+                        Height="40" 
+                        Width="40"
+                        Margin="0,0,135,0"
+                        Style="{StaticResource BlockButton}"
+                        HorizontalAlignment="Right"
+                        Background="Transparent"
+                        ToolTip="В начало листа"
+                        Click="MoveToStartList_Click">
+                    <Image Source="\Images\tostart.png" 
+                           Stretch="Fill"/>
+                </Button>
+
+                <Button x:Name="MoveToLeft"
+                        Grid.Row="0" Grid.Column="1"
+                        Height="{Binding ElementName=MoveToStartList, Path=ActualHeight}" 
+                        Width="{Binding ElementName=MoveToStartList, Path=ActualWidth}"
+                        Margin="0,0,90,0"
+                        Style="{StaticResource BlockButton}"
+                        Background="Transparent"
+                        HorizontalAlignment="Right"
+                        ToolTip="Назад на одну страницу"
+                        Click="MoveToLeft_Click">
+                    <Image Source="\Images\left.png" 
+                           Stretch="Fill"/>
+                </Button>
+
+                <Button x:Name="MoveToRight"
+                        Grid.Row="0" Grid.Column="1"
+                        Height="{Binding ElementName=MoveToStartList, Path=ActualHeight}" 
+                        Width="{Binding ElementName=MoveToStartList, Path=ActualWidth}"
+                        Margin="0,0,45,0"
+                        Style="{StaticResource BlockButton}"
+                        Background="Transparent"
+                        HorizontalAlignment="Right"
+                        ToolTip="Вперёд на одну страницу"
+                        Click="MoveToRight_Click">
+                    <Image Source="\Images\right.png" 
+                           Stretch="Fill"/>
+                </Button>
+
+                <Button x:Name="MoveToEndList"
+                        Grid.Row="0" Grid.Column="1"
+                        Height="{Binding ElementName=MoveToStartList, Path=ActualHeight}" 
+                        Width="{Binding ElementName=MoveToStartList, Path=ActualWidth}"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,0,0"
+                        Style="{StaticResource BlockButton}"
+                        Background="Transparent"
+                        ToolTip="В конец списка"
+                        Click="MoveToEndList_Click">
+                    <Image Source="\Images\toend.png" 
+                           Stretch="Fill"/>
+                </Button>
+
+                <Border Grid.Column="0"
+                        Grid.Row="1"
+                        CornerRadius="0,20,20,0"
+                        Background="White"
+                        BorderBrush="Black"
+                        BorderThickness="0,1,1,1">
+
+                    <StackPanel x:Name="NavigationButtons"
+                                Orientation="Vertical">
+
+                        <Button x:Name="OpenEmployeesPage" 
+                                Style="{StaticResource RoundedDefaultButton}"
+                                Grid.Column="0" Grid.Row="1"
+                                MouseEnter="ColorizeButton"
+                                MouseLeave="UnColorizeButton" 
+                                Margin="0,100,0,0"
+                                Click="OpenEmployeesPage_Click">
+                            <Image Source="\Images\employees.png" 
+                                   Style="{StaticResource ButtonImage}"
+                                   Height="55" Width="55"/>
+                        </Button>
+
+                        <Button x:Name="OpenKeysPage" 
+                                Style="{StaticResource RoundedDefaultButton}"
+                                Grid.Column="0" Grid.Row="1"
+                                HorizontalAlignment="Center"
+                                MouseEnter="ColorizeButton"
+                                MouseLeave="UnColorizeButton"
+                                
+                                Click="OpenKeysPage_Click">
+                            <Image Source="/Images/keys.png" 
+                                   Style="{StaticResource ButtonImage}"/>
+                        </Button>
+
+                        <Button x:Name="OpenGamesPage" 
+                                Style="{StaticResource RoundedGradientButton}"
+                                Grid.Column="0" Grid.Row="1"
+                                HorizontalAlignment="Center">
+                            <Image Source="\Images\games.png" 
+                                   Style="{StaticResource ButtonImage}"
+                                   Height="50" Width="50"/>
+                        </Button>
+
+                        <Button x:Name="OpenNewRaportPage" 
+                                Style="{StaticResource RoundedDefaultButton}"
+                                Grid.Column="0" Grid.Row="1"
+                                HorizontalAlignment="Center"
+                                MouseEnter="ColorizeButton"
+                                MouseLeave="UnColorizeButton"
+                                Click="OpenNewRaportPage_Click">
+                            <Image Source="\Images\newraport.png" 
+                                   Style="{StaticResource ButtonImage}"
+                                   Height="65" Width="65"/>
+                        </Button>
+
+                        <Button x:Name="OpenLogOut" 
+                                Style="{StaticResource RoundedDefaultButton}"
+                                Grid.Column="0" Grid.Row="1"
+                                HorizontalAlignment="Center"
+                                MouseEnter="ColorizeButton"
+                                MouseLeave="UnColorizeButton"
+                                Click="LogOut_Click">
+                            <Image Source="\Images\logout.png"
+                                   Style="{StaticResource ButtonImage}"
+                                   Margin="5,0,0,0"
+                                   Height="45" Width="45"/>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

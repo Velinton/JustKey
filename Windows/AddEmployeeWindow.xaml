@@ -1,0 +1,460 @@
+﻿<Window x:Class="JustKey.Windows.AddEmployeeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JustKey.Windows"
+        mc:Ignorable="d"
+        Height="600"
+        Width="900"
+        Style="{StaticResource WindowStyle}"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
+        CommandManager.PreviewExecuted="Window_PreviewExecuted">
+    <Grid>
+        <Border Style="{StaticResource AddNewStyle}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="45"/>
+                </Grid.RowDefinitions>
+
+                <Border x:Name="MainBorder"
+                        Grid.Row="0"
+                        Width="160"
+                        Margin="10"
+                        Height="225"
+                        HorizontalAlignment="Left"
+                        BorderBrush="Black"
+                        BorderThickness="2"
+                        MouseLeftButtonDown="AddEmployeePhoto_Click">
+                    <Canvas x:Name="PhotoCanvas"
+                            Cursor="Hand">
+                        
+                        <TextBlock TextDecorations="Baseline"
+                                   Canvas.Left="2.5"
+                                   Canvas.Bottom="30"
+                                   TextAlignment="Center"
+                                   Margin="0,0,0,0"
+                                   FontSize="14"
+                                   Width="150">
+                        Загрузить фото
+                        <LineBreak/>
+                        сотрудника
+                            </TextBlock>
+
+                        <Image x:Name="EmployeePhoto"
+                               Source="\Images\addphoto.png"
+                               Canvas.Left="47" 
+                               Canvas.Bottom="100"
+                               Height="60"
+                               Width="60" 
+                               Cursor="Hand"
+                           />
+                    </Canvas>
+                </Border>
+
+                <Label Grid.Row="0"
+                       Width="116"
+                       Height="30"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       HorizontalContentAlignment="Right"
+                       Margin="185,25,70,0"
+                       Content="Фамилия:"
+                       FontSize="16"/>
+
+                <TextBox x:Name="EmployeeLastName"
+                         Height="20"
+                         Width="300"
+                         VerticalAlignment="Top"
+                         Margin="0,32,0,0"
+                         MaxLength="50"
+                         VerticalContentAlignment="Center"/>
+
+                <Label Grid.Row="0"
+                       Width="116"
+                       Height="30"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       HorizontalContentAlignment="Right"
+                       Margin="185,60,70,0"
+                       Content="Имя:"
+                       FontSize="16"/>
+
+                <TextBox x:Name="EmployeeName" 
+                         Height="20"
+                         Width="300"
+                         VerticalAlignment="Top"
+                         Margin="0,65,0,0"
+                         MaxLength="50"
+                         VerticalContentAlignment="Center"/>
+
+                <Label Grid.Row="0"
+                       Width="116"
+                       Height="30"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Left"
+                       HorizontalContentAlignment="Right"
+                       Margin="185,95,70,0"
+                       Content="Отчество:"
+                       FontSize="16"/>
+
+                <TextBox x:Name="EmployeeMiddleName"
+                         Height="20"
+                         Width="300"
+                         VerticalAlignment="Top"
+                         Margin="0,100,0,0"
+                         VerticalContentAlignment="Center"
+                         MaxLength="50"/>
+
+                <Label Grid.Row="0"
+                       Width="116"
+                       Height="30"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       HorizontalContentAlignment="Right"
+                       Margin="185,130,70,0"
+                       Content="Дата рождения:"
+                       FontSize="16"/>
+
+                <DatePicker x:Name="EmployeeBirthDay"
+                            Height="25"
+                            Width="300"
+                            VerticalContentAlignment="Center"
+                            Margin="0,17,0,0"/>
+
+                <Label Grid.Row="0"
+                       Width="115"
+                       Height="30"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       HorizontalContentAlignment="Right"
+                       Margin="185,165,70,0"
+                       Content="Возраст:"
+                       FontSize="16"/>
+
+                <Border Height="20"
+                        Width="170"
+                        Grid.Row="0"
+                        Margin="0,85,131,0">
+                    <Border.OpacityMask>
+                        <VisualBrush>
+                            <VisualBrush.Visual>
+                                <Border Background="Black" SnapsToDevicePixels="True"
+                                        CornerRadius="4"
+                                        Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=Border}}"
+                                        Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=Border}}" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Border.OpacityMask>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="22"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="EmployeeAges"
+                                 Grid.RowSpan="2"
+                                 Grid.Column="0"
+                                 Text="0"
+                                 VerticalContentAlignment="Center"
+                                 Padding="5,1"
+                                 Height="20"
+                                 BorderBrush="Transparent"
+                                 MaxLength="2"/>
+                        <Button x:Name="IncrementAge"
+                                Style="{StaticResource UpDownButtonStyle}"
+                                Grid.Column="1" Grid.Row="0"
+                                Width="auto" Height="auto"
+                                Click="IncrementAge_Click">
+                            <Image Source="\Images\arrowup.png"
+                                   Stretch="Uniform" 
+                                   Width="9" 
+                                   VerticalAlignment="Center" 
+                                   HorizontalAlignment="Center"/>
+                        </Button>
+
+                        <Button x:Name="DecrementAge"
+                                Style="{StaticResource UpDownButtonStyle}"
+                                Grid.Column="1" Grid.Row="1"
+                                Width="auto" Height="auto"
+                                Click="DecrementAge_Click">
+                            <Image Source="\Images\arrowdown.png"
+                                   Stretch="Uniform" 
+                                   Width="9" 
+                                   VerticalAlignment="Center" 
+                                   HorizontalAlignment="Center"/>
+                        </Button>
+
+                        <Border BorderBrush="Gray" 
+                                IsHitTestVisible="False"
+                                BorderThickness="1" 
+                                CornerRadius="4"
+                                Grid.RowSpan="2" 
+                                Grid.ColumnSpan="2" 
+                                Padding="0" 
+                                Margin="0"/>
+                    </Grid>
+                </Border>
+
+                <Label Width="130"
+                       Height="30"
+                       HorizontalAlignment="Left"
+                       HorizontalContentAlignment="Right"
+                       Margin="170,150,0,0"
+                       Content="Номер телефона:"
+                       FontSize="16"/>
+
+                <TextBox x:Name="EmployeePhoneNumber"
+                         Height="20"
+                         Width="300"
+                         VerticalAlignment="Top"
+                         Margin="0,205,0,0"
+                         MaxLength="20"
+                         VerticalContentAlignment="Center"
+                         PreviewTextInput="EmployeePhoneNumber_PreviewTextInput"/>
+
+                <Label Width="130"
+                       Height="30"
+                       HorizontalAlignment="Left"
+                       HorizontalContentAlignment="Right"
+                       Margin="170,215,0,0"
+                       Content="Почта:"
+                       FontSize="16"/>
+
+                <TextBox x:Name="EmployeeEmail"
+                         Height="20"
+                         Width="300"
+                         VerticalAlignment="Top"
+                         Margin="0,238,0,0"
+                         TextChanged="EmployeeEmail_TextChanged"
+                         MaxLength="100"
+                         VerticalContentAlignment="Center"/>
+
+                <Label Grid.Row="1"
+                       Width="135"
+                       Height="30"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       HorizontalContentAlignment="Right"
+                       Margin="5,10,0,0"
+                       Content="Стаж (в месяцах):"
+                       FontSize="16"/>
+
+                <Border Grid.Row="1" 
+                        Height="20"
+                        Width="170"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Margin="140,15,0,0">
+                    <Border.OpacityMask>
+                        <VisualBrush>
+                            <VisualBrush.Visual>
+                                <Border Background="Black" SnapsToDevicePixels="True"
+                                        CornerRadius="4"
+                                        Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=Border}}"
+                                        Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=Border}}" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Border.OpacityMask>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="22"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="EmployeeExperience"
+                                 Grid.RowSpan="2"
+                                 Grid.Column="0"
+                                 Text="0"
+                                 VerticalContentAlignment="Center"
+                                 Padding="5,1"
+                                 Height="20"
+                                 MaxLength="3"
+                                 BorderBrush="Transparent"/>
+                        <Button x:Name="IncrementExperience"
+                                Style="{StaticResource UpDownButtonStyle}"
+                                Grid.Column="1" Grid.Row="0"
+                                Width="auto" Height="auto"
+                                Click="IncrementExperience_Click">
+                            <Image Source="\Images\arrowup.png"
+                                   Stretch="Uniform" 
+                                   Width="9" 
+                                   VerticalAlignment="Center" 
+                                   HorizontalAlignment="Center"/>
+                        </Button>
+
+                        <Button x:Name="DecrementExperience"
+                                Style="{StaticResource UpDownButtonStyle}"
+                                Grid.Column="1" Grid.Row="1"
+                                Width="auto" Height="auto"
+                                Click="DecrementExperience_Click">
+                            <Image Source="\Images\arrowdown.png"
+                                   Stretch="Uniform" 
+                                   Width="9" 
+                                   VerticalAlignment="Center" 
+                                   HorizontalAlignment="Center"/>
+                        </Button>
+
+                        <Border BorderBrush="Gray" 
+                                IsHitTestVisible="False"
+                                BorderThickness="1" 
+                                CornerRadius="4"
+                                Grid.RowSpan="2" 
+                                Grid.ColumnSpan="2" 
+                                Padding="0" 
+                                Margin="0"/>
+                    </Grid>
+                </Border>
+
+                <Label Grid.Row="1"
+                       Width="135"
+                       Height="30"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       HorizontalContentAlignment="Right"
+                       Margin="5,45,70,0"
+                       Content="Должность:"
+                       FontSize="16"/>
+
+                <ComboBox x:Name="EmployeePositions" 
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Top"
+                          Grid.Row="1"
+                          Height="20" Width="250"
+                          Margin="140,52,70,0"
+                          FontSize="12"
+                          IsEditable="True"
+                          IsReadOnly="True"
+                          VerticalContentAlignment="Center"
+                          Text="Выбрать из списка">
+                </ComboBox>
+
+                <Label Grid.Row="1"
+                       Width="135"
+                       Height="30"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       HorizontalContentAlignment="Right"
+                       Margin="5,80,70,0"
+                       Content="Заплата:"
+                       FontSize="16"/>
+
+                <TextBox x:Name="EmployeeSalary" 
+                         Grid.Row="1"
+                         Height="20"
+                         Width="300"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Margin="140,87,70,0"
+                         VerticalContentAlignment="Center"
+                         MaxLength="6"/>
+
+                <Label Grid.Row="1"
+                       Width="135"
+                       Height="30"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       HorizontalContentAlignment="Right"
+                       Margin="5,115,70,0"
+                       Content="Работает с:"
+                       FontSize="16"/>
+
+                <DatePicker x:Name="EmployeeDateOfEmployment"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Grid.Row="1"
+                            Height="25"
+                            Width="300"
+                            VerticalContentAlignment="Center"
+                            Margin="140,119,0,0"/>
+
+                <Label Grid.Row="1"
+                       Width="135"
+                       Height="30"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       HorizontalContentAlignment="Right"
+                       Margin="5,150,70,0"
+                       Content="Номер счёта:"
+                       FontSize="16"/>
+
+                <TextBox x:Name="EmployeeAccountNumber" 
+                         Grid.Row="1"
+                         Height="20"
+                         Width="300"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Margin="140,156,70,0"
+                         MaxLength="50"
+                         VerticalContentAlignment="Center"/>
+
+                <Label Width="135"
+                       Height="30"
+                       Grid.Row="1"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       HorizontalContentAlignment="Right"
+                       Margin="5,185,0,0"
+                       Content="Логин:"
+                       FontSize="16"/>
+
+                <TextBox x:Name="EmployeeLogin"
+                         Grid.Row="1"
+                         Height="20"
+                         Width="300"
+                         VerticalAlignment="Top"
+                         Margin="10,191,330,0"
+                         MaxLength="30"
+                         VerticalContentAlignment="Center"/>
+
+                <Label Width="135"
+                       Height="30"
+                       Grid.Row="1"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       HorizontalContentAlignment="Right"
+                       Margin="5,220,0,0"
+                       Content="Пароль:"
+                       FontSize="16"/>
+
+                <TextBox x:Name="EmployeePassword"
+                         Grid.Row="1"
+                         Height="20"
+                         Width="300"
+                         VerticalAlignment="Top"
+                         Margin="10,227,330,0"
+                         VerticalContentAlignment="Center"
+                         MaxLength="15"/>
+
+                <Button x:Name="AddNewEmployee"
+                        Grid.Row="2"
+                        Height="20"
+                        Width="100"
+                        Content="Добавить"
+                        Margin="0,0,15,0"
+                        IsDefault="True"
+                        HorizontalAlignment="Right"
+                        Click="AddNewEmployee_Click"/>
+
+                <Button x:Name="Cancel"
+                          Grid.Row="2"
+                          Height="20"
+                          Width="100"
+                          Content="Отмена"
+                          Margin="15,0,0,0"
+                          HorizontalAlignment="Left"
+                          IsCancel="True"/>
+
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

@@ -1,0 +1,485 @@
+﻿<Window x:Class="JustKey.Windows.InfoAboutGameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JustKey.Windows"
+        mc:Ignorable="d"
+        Style="{StaticResource WindowStyle}"
+        WindowStartupLocation="CenterScreen"
+        FontSize="18"
+        Loaded="Window_Loaded">
+    <Border Style="{StaticResource AddNewStyle}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="350"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="76"/>
+            </Grid.RowDefinitions>
+            
+            <!--#region TOP-->
+
+            <Grid Grid.Row="0"
+                  Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="220"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="Back"
+                        Margin="10"
+                        Width="30"
+                        Height="30"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        IsDefault="False"
+                        Style="{StaticResource RoundedDefaultButton}"
+                        Click="BackToGameList">
+                    <Image Source="\Images\back.png"/>
+                </Button>
+                
+                <Image x:Name="GameCover"
+                       Margin="5"
+                       Grid.Column="1"/>
+
+                <Border Grid.Column="2"
+                        BorderThickness="1"
+                        BorderBrush="Black"
+                        Margin="10">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                  VerticalScrollBarVisibility="Disabled">
+                        <StackPanel x:Name="GameImages"
+                                    Orientation="Horizontal"
+                                    CanHorizontallyScroll="True">
+                        </StackPanel>
+                    </ScrollViewer>
+                </Border>
+            </Grid>
+            
+            <!--#endregion TOP-->
+
+            <!--#region MIDDLE-->
+            
+            <ScrollViewer Grid.Column="1"
+                          Grid.Row="1"
+                          HorizontalScrollBarVisibility="Disabled">
+                <Grid x:Name="GameData">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock x:Name="NameOfGameView" 
+                               Text="Название игры..."
+                               Grid.Column="1"
+                               Grid.Row="0"
+                               TextWrapping="Wrap"
+                               VerticalAlignment="Center"
+                               Margin="5,0,0,50"/>
+
+                    <TextBox x:Name="EditedNameOfGame"
+                             Grid.Column="1"
+                             Grid.Row="0"
+                             Visibility="Collapsed"
+                             AcceptsReturn="True"
+                             VerticalAlignment="Center"
+                             Margin="5,0,0,50"
+                             TextWrapping="Wrap"
+                             Text="{Binding ElementName=NameOfGameView, Path=Text}"/>
+
+                    <Label Grid.Column="1"
+                           Content="Количество копий:"
+                           Grid.Row="0"
+                           VerticalAlignment="Center"
+                           Margin="5,0,0,0"/>
+
+                    <Border Height="20"
+                            Width="170"
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            Margin="165,0,0,0">
+                        <Border.OpacityMask>
+                            <VisualBrush>
+                                <VisualBrush.Visual>
+                                    <Border Background="Black" SnapsToDevicePixels="True"
+                                        CornerRadius="4"
+                                        Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=Border}}"
+                                        Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=Border}}" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Border.OpacityMask>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="22"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="ProductCounter"
+                                     Grid.RowSpan="2"
+                                     Grid.Column="0"
+                                     Text="0"
+                                     VerticalContentAlignment="Center"
+                                     Padding="5,0"
+                                     Height="20"
+                                     BorderBrush="Transparent"
+                                     PreviewTextInput="OnlyNumber"
+                                     MaxLength="9"/>
+                            <Button x:Name="IncrementCount"
+                                Style="{StaticResource UpDownButtonStyle}"
+                                Grid.Column="1" Grid.Row="0"
+                                Width="auto" Height="auto"
+                                Click="IncrementCount_Click">
+                                <Image Source="\Images\arrowup.png"
+                                   Stretch="Uniform" 
+                                   Width="9" 
+                                   VerticalAlignment="Center" 
+                                   HorizontalAlignment="Center"/>
+                            </Button>
+
+                            <Button x:Name="DecrementCount"
+                                Style="{StaticResource UpDownButtonStyle}"
+                                Grid.Column="1" Grid.Row="1"
+                                Width="auto" Height="auto"
+                                Click="DecrementCount_Click">
+                                <Image Source="\Images\arrowdown.png"
+                                   Stretch="Uniform" 
+                                   Width="9" 
+                                   VerticalAlignment="Center" 
+                                   HorizontalAlignment="Center"/>
+                            </Button>
+
+                            <Border BorderBrush="Gray" 
+                                IsHitTestVisible="False"
+                                BorderThickness="1" 
+                                CornerRadius="4"
+                                Grid.RowSpan="2" 
+                                Grid.ColumnSpan="2" 
+                                Padding="0" 
+                                Margin="0"/>
+                        </Grid>
+                    </Border>
+
+                    <Label Grid.Column="1"
+                           Content="Цена:"
+                           Grid.Row="0"
+                           VerticalAlignment="Center"
+                           Margin="5,50,0,0"/>
+
+                    <Border Height="20"
+                            Width="170"
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="65,50,0,0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left">
+                        <Border.OpacityMask>
+                            <VisualBrush>
+                                <VisualBrush.Visual>
+                                    <Border Background="Black" SnapsToDevicePixels="True"
+                                        CornerRadius="4"
+                                        Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=Border}}"
+                                        Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=Border}}" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Border.OpacityMask>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="22"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="ProductPrice"
+                                 Grid.RowSpan="2"
+                                 Grid.Column="0"
+                                 Text="0"
+                                 VerticalContentAlignment="Center"
+                                 Padding="5,0"
+                                 Height="20"
+                                 BorderBrush="Transparent"
+                                 PreviewTextInput="OnlyNumber"
+                                 MaxLength="9"/>
+                            <Button x:Name="IncrementPrice"
+                                Style="{StaticResource UpDownButtonStyle}"
+                                Grid.Column="1" Grid.Row="0"
+                                Width="auto" Height="auto"
+                                Click="IncrementPrice_Click">
+                                <Image Source="\Images\arrowup.png"
+                                   Stretch="Uniform" 
+                                   Width="9" 
+                                   VerticalAlignment="Center" 
+                                   HorizontalAlignment="Center"/>
+                            </Button>
+
+                            <Button x:Name="DecrementPrice"
+                                Style="{StaticResource UpDownButtonStyle}"
+                                Grid.Column="1" Grid.Row="1"
+                                Width="auto" Height="auto"
+                                Click="DecrementPrice_Click">
+                                <Image Source="\Images\arrowdown.png"
+                                   Stretch="Uniform" 
+                                   Width="9" 
+                                   VerticalAlignment="Center" 
+                                   HorizontalAlignment="Center"/>
+                            </Button>
+
+                            <Border BorderBrush="Gray" 
+                                IsHitTestVisible="False"
+                                BorderThickness="1" 
+                                CornerRadius="4"
+                                Grid.RowSpan="2" 
+                                Grid.ColumnSpan="2" 
+                                Padding="0" 
+                                Margin="0"/>
+                        </Grid>
+                    </Border>
+
+                    <TextBlock Text="Описание игры: "
+                               Grid.Column="1"
+                               Grid.Row="1"
+                               FontWeight="SemiBold"
+                               VerticalAlignment="Center"
+                               Margin="5,0,0,0"/>
+                    
+                    <TextBlock x:Name="DescriptionView"
+                               Grid.Column="1"
+                               Grid.Row="2"
+                               TextWrapping="Wrap"
+                               Margin="5,0,0,0"/>
+
+                    <TextBox x:Name="EditedDescription"
+                             Grid.Column="1"
+                             Grid.Row="2"
+                             Visibility="Collapsed"
+                             AcceptsReturn="True"
+                             VerticalAlignment="Center"
+                             Margin="5,0,0,0"
+                             TextWrapping="Wrap"
+                             Text="{Binding ElementName=DescriptionView, Path=Text}"/>
+
+                    <TextBlock Text="Системные требования: "
+                               Grid.Column="1"
+                               Grid.Row="3"
+                               FontWeight="SemiBold"
+                               VerticalAlignment="Center"
+                               Margin="5,0,0,0"/>
+
+                    <TextBlock x:Name="SystemRequitementsView"
+                               Grid.Column="1"
+                               Grid.Row="4"
+                               TextWrapping="Wrap"
+                               Margin="5,0,0,0"/>
+
+                    <TextBox x:Name="EditedSystemRequitements"
+                             Grid.Column="1"
+                             Grid.Row="4"
+                             Visibility="Collapsed"
+                             AcceptsReturn="True"
+                             VerticalAlignment="Center"
+                             Margin="5,0,0,0"
+                             TextWrapping="Wrap"
+                             Text="{Binding ElementName=SystemRequitementsView, Path=Text}"/>
+
+                    <TextBlock Text="Информация об игре: "
+                               Grid.Column="1"
+                               Grid.Row="5"
+                               FontWeight="SemiBold"
+                               VerticalAlignment="Center"
+                               Margin="5,0,0,0"/>
+
+                    <ComboBox x:Name="GameCategories" 
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Center"
+                              Grid.Column="1"
+                              Grid.Row="5"
+                              Height="20" Width="170"
+                              Margin="190,0,0,0"
+                              FontSize="12"
+                              IsEditable="True"
+                              IsReadOnly="True"
+                              VerticalContentAlignment="Center"
+                              Text="Добавить жанр"
+                              SelectionChanged="GameCategories_SelectionChanged">
+                    </ComboBox>
+
+                    <ComboBox x:Name="GameDeveloper" 
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              Grid.Column="1"
+                              Grid.Row="5"
+                              Height="20" Width="170"
+                              Margin="0,0,100,0"
+                              FontSize="12"
+                              IsEditable="True"
+                              IsReadOnly="True"
+                              VerticalContentAlignment="Center"
+                              Text="Добавить разработчика"
+                              SelectionChanged="GameDeveloper_SelectionChanged">
+                    </ComboBox>
+
+                    <TextBlock x:Name="CategoriesView"
+                               Grid.Column="1"
+                               Grid.Row="6"
+                               TextWrapping="Wrap"
+                               Margin="5,0,0,0"/>
+
+                    <TextBox x:Name="EditedCategories"
+                             Grid.Column="1"
+                             Grid.Row="6"
+                             Visibility="Collapsed"
+                             AcceptsReturn="True"
+                             Margin="5,0,0,0"
+                             TextWrapping="Wrap"
+                             Text="{Binding ElementName=CategoriesView, Path=Text}"/>
+
+                    <TextBlock x:Name="DevelopersView"
+                               Grid.Column="1"
+                               Grid.Row="6"
+                               TextWrapping="Wrap"
+                               Margin="5,30,0,0"/>
+
+                    <TextBox x:Name="EditedDevelopers"
+                             Grid.Column="1"
+                             Grid.Row="6"
+                             Visibility="Collapsed"
+                             AcceptsReturn="True"
+                             Margin="5,30,0,0"
+                             TextWrapping="Wrap"
+                             Text="{Binding ElementName=DevelopersView, Path=Text}"/>
+
+                    <Button x:Name="EditFirstInfo"
+                            Grid.Row="0"
+                            Width="30"
+                            Height="30"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Style="{StaticResource RoundedDefaultButton}"
+                            Click="EditFirstInfo_Click">
+                        <Image Source="\Images\blackpen.png"
+                               Height="24"
+                               Width="24"/>
+                    </Button>
+                    
+                    <Button x:Name="EditDescription"
+                            Grid.Row="1"
+                            Width="30"
+                            Height="30"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Style="{StaticResource RoundedDefaultButton}"
+                            Click="EditDescription_Click">
+                        <Image Source="\Images\blackpen.png"
+                               Height="24"
+                               Width="24"/>
+                    </Button>
+                    <Button x:Name="EditSystemRequitements"
+                            Grid.Row="3"
+                            Width="30"
+                            Height="30"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Style="{StaticResource RoundedDefaultButton}"
+                            Click="EditSystemRequitements_Click">
+                        <Image Source="\Images\blackpen.png"
+                               Height="24"
+                               Width="24"/>
+                    </Button>
+                    <Button x:Name="EditGeneralInfo"
+                            Grid.Row="5"
+                            Width="30"
+                            Height="30"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Style="{StaticResource RoundedDefaultButton}"
+                            Click="EditGeneralInfo_Click">
+                        <Image Source="\Images\blackpen.png"
+                               Height="24"
+                               Width="24"/>
+                    </Button>
+                </Grid>
+            </ScrollViewer>
+            
+            <!--#endregion MIDDLE-->
+
+            <!--#region bottom-->
+
+            <Button x:Name="SaveChanges"
+                    Grid.Row="2"
+                    Height="22"
+                    Width="160"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right"
+                    Margin="0,2,10,0"
+                    FontSize="16"
+                    Cursor="Hand"
+                    BorderBrush="Black"
+                    Background="AliceBlue"
+                    Content="Сохранить изменения"
+                    Click="SaveChanges_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button x:Name="EditGameCover"
+                    Grid.Row="2"
+                    Height="22"
+                    Width="160"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right"
+                    Margin="0,25,10,0"
+                    FontSize="16"
+                    Cursor="Hand"
+                    BorderBrush="Black"
+                    Background="AliceBlue"
+                    Content="Изменить обложку"
+                    Click="EditGameCover_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="DeleteGame"
+                    Grid.Row="2"
+                    Height="22"
+                    Width="160"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,10,5"
+                    FontSize="16"
+                    Cursor="Hand"
+                    BorderBrush="Black"
+                    Background="AliceBlue"
+                    Content="Удалить игру"
+                    Click="DeleteGame_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            
+            <!--#endregion bottom-->
+        </Grid>
+    </Border>
+</Window>

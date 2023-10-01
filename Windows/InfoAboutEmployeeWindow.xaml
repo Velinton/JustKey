@@ -1,0 +1,176 @@
+﻿<Window x:Class="JustKey.Windows.InfoAboutEmployeeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JustKey.Windows"
+        mc:Ignorable="d"
+        Height="700"
+        Width="600"
+        Style="{StaticResource WindowStyle}"
+        WindowStartupLocation="CenterScreen"
+        FontSize="18"
+        Loaded="Window_Loaded">
+    <Border Style="{StaticResource AddNewStyle}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="190"/>
+                <ColumnDefinition x:Name="SecondColumn"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="250"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Column="1"
+                        Height="60"
+                        VerticalAlignment="Center"
+                        Margin="0,0,0,55">
+                <TextBlock x:Name="EmployeeFullName"
+                       HorizontalAlignment="Left"
+                       Width="400"
+                       Height="20"/>
+                <TextBlock x:Name="EmployeePosition"
+                       HorizontalAlignment="Left"
+                       Margin="0,5,0,0"
+                       Height="20"
+                       Width="220"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1"
+                        Height="56"
+                        Width="240"
+                        Margin="0,15"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom">
+                <Button x:Name="ChangeAccount"
+                    Margin="0,0,0,7"
+                    Content="Изменить аккаунт"
+                    Background="White"
+                    BorderBrush="Black"
+                    Click="ChangeAccount_Click"/>
+                <Button x:Name="DeleteAccount"
+                    Content="Удалить аккаунт"
+                    Background="White"
+                    BorderBrush="Black"
+                    Click="DeleteAccount_Click"/>
+            </StackPanel>
+
+            <Border  x:Name="MainBorder"
+                     Grid.Row="0"
+                     Width="160"
+                     Margin="12"
+                     Height="225"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     BorderBrush="Black"
+                     BorderThickness="2"
+                     IsEnabled="False"
+                     Cursor="Hand">
+                <Image x:Name="EmployeePhoto"
+                       Stretch="Uniform"
+                       MouseLeftButtonDown="EmployeePhoto_MouseLeftButtonDown"
+                       />
+            </Border>
+
+            <StackPanel Grid.Row="1"
+                        HorizontalAlignment="Left"
+                        Orientation="Vertical"
+                        Width="160">
+                <Label 
+                    Content="Дата рождения:"
+                    HorizontalAlignment="Left"
+                    Margin="15,15,0,5"/>
+                <Label
+                    Content="Возраст:"
+                    HorizontalAlignment="Left"
+                    Margin="15,0,0,5"/>
+                <Label
+                    Content="Номер телефона:"
+                    HorizontalAlignment="Left"
+                    Margin="15,0,0,5"/>
+                <Label 
+                    Content="Почта:"
+                    HorizontalAlignment="Left"
+                    Margin="15,0,0,5"/>
+                <Label
+                    Content="Стаж:"
+                    HorizontalAlignment="Left"
+                    Margin="15,0,0,5"/>
+                <Label 
+                    Content="Зарплата:"
+                    HorizontalAlignment="Left"
+                    Margin="15,0,0,5"/>
+                <Label 
+                    Content="Работает с:"
+                    HorizontalAlignment="Left"
+                    Margin="15,0,0,5"/>
+                <Label 
+                    Content="Номер счёта:"
+                    HorizontalAlignment="Left"
+                    Margin="15,0,0,5"/>
+                <Label 
+                    Content="Логин:"
+                    HorizontalAlignment="Left"
+                    Margin="15,0,0,5"/>
+                <Label 
+                    Content="Пароль:"
+                    HorizontalAlignment="Left"
+                    Margin="15,0,0,5"/>
+            </StackPanel>
+
+            <StackPanel x:Name="PlaceForTextBoxes"
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        Orientation="Vertical" 
+                        IsEnabled="False">
+                <TextBlock x:Name="EmployeeBirthday"
+                           Width = "400"
+                           Margin="145,20,25,5"/>
+                <TextBlock x:Name="EmployeeAge"
+                           Width="400"
+                           Margin="145,10,25,5"/>
+                <TextBlock x:Name="EmployeePhoneNumber" 
+                           Width="400"
+                           Margin="145,10,25,5"/>
+                <TextBlock x:Name="EmployeeEmail" 
+                           Width="400"
+                           Margin="145,10,25,5"/>
+                <TextBlock x:Name="EmployeeExperience" 
+                           Width="400"
+                           Margin="145,10,25,5"/>
+                <TextBlock x:Name="EmployeeSalary" 
+                           Width="400"
+                           Margin="145,10,25,5"/>
+                <TextBlock x:Name="EmployeeDateOfEmployment" 
+                           Width="400"
+                           Margin="145,10,25,5"/>
+                <TextBlock x:Name="EmployeeAccountNumber" 
+                           Width="400"
+                           Margin="145,10,25,5"/>
+                <TextBlock x:Name="EmployeeLogin" 
+                           Width="400"
+                           Margin="145,10,25,5"/>
+                <TextBlock x:Name="EmployeePassword" 
+                           Width="400"
+                           Margin="145,10,25,5"/>
+            </StackPanel>
+
+            <Button x:Name = "BackToMainMenu"
+                    Height="22"
+                    Width="100"
+                    Background="Transparent"
+                    BorderBrush="Black"
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    FontSize="16"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Click="BackToMainMenu_Click"
+                    Margin="12"
+                    Content="Назад"/>
+        </Grid>
+    </Border>
+</Window>

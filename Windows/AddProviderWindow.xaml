@@ -1,0 +1,120 @@
+﻿<Window x:Class="JustKey.Windows.AddProviderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JustKey.Windows"
+        Style="{StaticResource WindowStyle}" 
+        WindowStartupLocation="CenterScreen"
+        CommandManager.PreviewExecuted="Window_PreviewExecuted"
+        Height="280" Width="500">
+    <Border Style="{StaticResource AddNewStyle}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border BorderThickness="0,0,0,1"
+                    Padding="7"
+                    BorderBrush="Gray">
+                <Canvas x:Name="providerCanvas">
+                    <Image Source="\Images\provider.png"
+                           Height="35"
+                           Width="35"
+                           Margin="10"/>
+                    <Label Content="Поставщик" 
+                           FontSize="18"
+                           Margin="45,15,0,0"/>
+                    <TextBox x:Name="ProviderName"
+                             FontSize="20"
+                             Width="{Binding ElementName=addressCanvas, Path=ActualWidth}"
+                             MaxHeight="75"
+                             MaxLength="500"
+                             Margin="0,55,0,0"
+                             PreviewTextInput="OnlyLettersAndNumbers"/>
+                </Canvas>
+            </Border>
+
+            <Border Grid.Row="1"
+                    Padding="7">
+                <Canvas x:Name="addressCanvas">
+                    <Image Source="\Images\maps.png"
+                           Height="35"
+                           Width="35"
+                           Margin="10"/>
+                    <Label Content="Адрес" 
+                           FontSize="18"
+                           Margin="45,15,0,0"/>
+                    <TextBox x:Name="ProviderAddress"
+                             FontSize="20"
+                             Margin="0,50,0,0"
+                             Width="{Binding ElementName=addressCanvas, Path=ActualWidth}"
+                             MaxHeight="75"
+                             TextWrapping="Wrap"
+                             PreviewTextInput="TextBox_PreviewTextInput"/>
+                </Canvas>
+            </Border>
+
+            <Border Grid.Column="1"
+                    Padding="7"
+                    BorderBrush="Gray"
+                    BorderThickness="1,0,0,0">
+                <StackPanel x:Name="emailPanel"
+                            VerticalAlignment="Center"
+                            Margin="0,10,0,0">
+                    <Label Content="Почта" 
+                           FontSize="18"/>
+                    <TextBox x:Name="ProviderEmail"
+                             FontSize="20"
+                             MaxLength="100"
+                             MaxWidth="{Binding ElementName=emailPanel, Path=ActualWidth}"
+                             TextChanged="ProviderEmail_TextChanged"/>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="1"
+                    Grid.Row="1"
+                    Padding="7"
+                    BorderBrush="Gray"
+                    BorderThickness="1,0,0,0">
+                <StackPanel x:Name="phonePanel"
+                            VerticalAlignment="Top">
+                    <Label Content="Номер телефона"
+                           FontSize="18"/>
+                    <TextBox x:Name="ProviderPhoneNumber"
+                             FontSize="20"
+                             MaxLength="20"
+                             PreviewTextInput="CheckPhoneNumber"
+                             MaxWidth="{Binding ElementName=infoPanel, Path=ActualWidth}"/>
+                </StackPanel>
+            </Border>
+
+            <Button x:Name="Cancel"
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    Height="20"
+                    Width="100"
+                    Margin="10"
+                    Content="Отмена"
+                    IsCancel="True"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"/>
+
+            <Button x:Name="AddNewProvider"
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    Height="20"
+                    Width="100"
+                    Margin="10"
+                    Content="Добавить"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Click="AddNewProvider_Click"/>
+        </Grid>
+    </Border>
+</Window>
